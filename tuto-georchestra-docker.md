@@ -59,3 +59,19 @@ certificatesResolvers:
 ping: {}
 
 ```
+
+## Step 3 : Update according traefik config in docker-compose.override.yml
+
+In docker-compose.override.yml,
+* we can comment the `traefick-me-certificate-downloader` block
+* for georchestra-127-0-1-1.traefik.me service :
+    * comment the `depends_on`section
+    * change the `volumes` section for :
+```
+        - /var/run/docker.sock:/var/run/docker.sock.ro
+        - ./resources/traefik_custom.yml:/etc/traefik/traefik.yml:ro
+        - acme:/acme
+```
+- ...
+
+
